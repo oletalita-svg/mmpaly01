@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retail Media — A Mídia que Decide</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0A0A0A;
+    --white: #FAFAFA;
+    --yellow: #FECD01;
+    --red: #E01027;
+    --gray: #1A1A1A;
+    --gray-mid: #2E2E2E;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  /* ── TYPOGRAPHY ───────────────────────── */
+  h1, h2, h3, .display {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.04em;
+    line-height: 0.95;
+  }
+
+  /* ── NAV ──────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 48px;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-mid);
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.12em;
+    color: var(--yellow);
+  }
+
+  .nav-cta {
+    background: var(--red);
+    color: var(--white);
+    border: none;
+    padding: 10px 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .nav-cta:hover { background: #c0001f; transform: translateY(-1px); }
+
+  /* ── HERO ─────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 120px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(254,205,1,0.07) 0%, transparent 60%),
+                radial-gradient(ellipse 40% 40% at 90% 10%, rgba(224,16,39,0.12) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    background: var(--yellow);
+    color: var(--black);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    margin-bottom: 28px;
+  }
+
+  .hero h1 {
+    font-size: clamp(72px, 8vw, 120px);
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .hero h1 span {
+    color: var(--yellow);
+    display: block;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--red);
+    -webkit-text-stroke: 0px;
+  }
+
+  .hero-sub {
+    font-size: 17px;
+    color: rgba(250,250,250,0.65);
+    margin-top: 28px;
+    max-width: 440px;
+    font-style: italic;
+    line-height: 1.7;
+  }
+
+  .hero-cta-group {
+    margin-top: 48px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .btn-primary {
+    background: var(--yellow);
+    color: var(--black);
+    border: none;
+    padding: 16px 40px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.2s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(254,205,1,0.3); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--white);
+    border: 1px solid rgba(250,250,250,0.3);
+    padding: 16px 36px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--white); }
+
+  /* hero right — big number display */
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 32px;
+    position: relative;
+  }
+
+  .hero-stat {
+    text-align: right;
+    position: relative;
+  }
+
+  .hero-stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(80px, 10vw, 140px);
+    line-height: 0.9;
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(254,205,1,0.35);
+  }
+
+  .hero-stat:first-child .hero-stat-num { -webkit-text-stroke: 1.5px rgba(224,16,39,0.45); }
+
+  .hero-stat-label {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(250,250,250,0.4);
+    margin-top: 4px;
+  }
+
+  /* ── TICKER ───────────────────────────── */
+  .ticker-wrap {
+    overflow: hidden;
+    background: var(--yellow);
+    padding: 14px 0;
+    white-space: nowrap;
+  }
+
+  .ticker-track {
+    display: inline-flex;
+    animation: ticker 28s linear infinite;
+  }
+
+  .ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 24px;
+    padding-right: 56px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 0.08em;
+    color: var(--black);
+  }
+
+  .ticker-dot {
+    width: 6px; height: 6px;
+    background: var(--red);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ── SECTION BASE ─────────────────────── */
+  section {
+    padding: 120px 48px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .section-title {
+    font-size: clamp(48px, 5vw, 80px);
+    margin-bottom: 0;
+  }
+
+  .section-title span { color: var(--red); }
+
+  /* ── WHAT IS ──────────────────────────── */
+  .what-is {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .what-is-left {}
+
+  .what-is-desc {
+    margin-top: 36px;
+    font-size: 18px;
+    color: rgba(250,250,250,0.7);
+    line-height: 1.75;
+    max-width: 480px;
+  }
+
+  .channels-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 0;
+  }
+
+  .channel-item {
+    background: var(--gray);
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 15px;
+    font-weight: 400;
+    color: rgba(250,250,250,0.75);
+    transition: background 0.2s, color 0.2s;
+    border-left: 2px solid transparent;
+  }
+
+  .channel-item:hover {
+    background: var(--gray-mid);
+    color: var(--white);
+    border-left-color: var(--yellow);
+  }
+
+  .channel-icon {
+    width: 8px; height: 8px;
+    background: var(--yellow);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── WHY GROWS ────────────────────────── */
+  .why-grows {
+    background: var(--gray);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .why-grows::before {
+    content: 'WHY';
+    position: absolute;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30vw;
+    color: rgba(254,205,1,0.03);
+    top: -10%;
+    right: -5%;
+    letter-spacing: -0.02em;
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  .why-content {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .why-insight {
+    margin-top: 40px;
+    padding: 32px 36px;
+    border: 1px solid var(--gray-mid);
+    position: relative;
+  }
+
+  .why-insight::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: var(--red);
+  }
+
+  .why-insight p {
+    font-size: 16px;
+    color: rgba(250,250,250,0.65);
+    line-height: 1.75;
+  }
+
+  .why-insight strong {
+    display: block;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+
+  .why-three {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .why-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 28px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--gray-mid);
+  }
+
+  .why-step:last-child { border-bottom: none; }
+
+  .why-step-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 56px;
+    line-height: 1;
+    color: var(--yellow);
+    flex-shrink: 0;
+    width: 64px;
+  }
+
+  .why-step-text h3 {
+    font-size: 22px;
+    margin-bottom: 8px;
+    color: var(--white);
+  }
+
+  .why-step-text p {
+    font-size: 15px;
+    color: rgba(250,250,250,0.55);
+  }
+
+  /* ── BRANDS ───────────────────────────── */
+  .brands-section {}
+
+  .brands-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    margin-bottom: 80px;
+  }
+
+  .brands-desc {
+    padding-top: 16px;
+    font-size: 17px;
+    color: rgba(250,250,250,0.65);
+    line-height: 1.75;
+  }
+
+  .brands-logos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+  }
+
+  .brand-logo-box {
+    background: var(--gray);
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.08em;
+    color: rgba(250,250,250,0.35);
+    transition: color 0.2s, background 0.2s;
+    cursor: default;
+  }
+
+  .brand-logo-box:hover {
+    background: var(--gray-mid);
+    color: var(--white);
+  }
+
+  .brand-logo-box.highlight { color: var(--yellow); }
+
+  /* ── BENEFITS STRIP ───────────────────── */
+  .benefits-strip {
+    background: var(--yellow);
+    padding: 80px 48px;
+    color: var(--black);
+  }
+
+  .benefits-strip .section-label { color: var(--red); }
+
+  .benefits-strip .section-title { color: var(--black); }
+  .benefits-strip .section-title span { color: var(--red); }
+
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2px;
+    margin-top: 56px;
+  }
+
+  .benefit-card {
+    background: rgba(10,10,10,0.08);
+    padding: 32px 24px;
+    transition: background 0.2s;
+  }
+
+  .benefit-card:hover { background: rgba(10,10,10,0.16); }
+
+  .benefit-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 52px;
+    line-height: 1;
+    color: var(--red);
+    margin-bottom: 14px;
+  }
+
+  .benefit-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 0.04em;
+    color: var(--black);
+    margin-bottom: 10px;
+  }
+
+  .benefit-desc {
+    font-size: 14px;
+    color: rgba(10,10,10,0.65);
+    line-height: 1.65;
+  }
+
+  /* ── SEGMENTATION ─────────────────────── */
+  .segmentation {
+    background: var(--black);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .seg-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .seg-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 40px;
+  }
+
+  .seg-tag {
+    border: 1px solid var(--gray-mid);
+    padding: 10px 20px;
+    font-size: 14px;
+    color: rgba(250,250,250,0.55);
+    transition: all 0.2s;
+    cursor: default;
+  }
+
+  .seg-tag:hover,
+  .seg-tag.active {
+    border-color: var(--yellow);
+    color: var(--yellow);
+    background: rgba(254,205,1,0.06);
+  }
+
+  .seg-quote {
+    position: relative;
+    padding: 48px 48px 48px 64px;
+    background: var(--gray);
+  }
+
+  .seg-quote::before {
+    content: '"';
+    position: absolute;
+    top: -20px; left: 32px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 120px;
+    color: var(--yellow);
+    line-height: 1;
+    opacity: 0.5;
+  }
+
+  .seg-quote p {
+    font-size: 22px;
+    line-height: 1.65;
+    color: var(--white);
+    font-style: italic;
+  }
+
+  .seg-quote cite {
+    display: block;
+    margin-top: 24px;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    font-style: normal;
+  }
+
+  /* ── JOURNEY ──────────────────────────── */
+  .journey {
+    background: var(--gray);
+  }
+
+  .journey-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 60px;
+  }
+
+  .journey-card {
+    background: var(--black);
+    padding: 40px 36px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s;
+  }
+
+  .journey-card:hover { transform: translateY(-4px); }
+
+  .journey-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--yellow);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .journey-card:hover::after { transform: scaleX(1); }
+
+  .journey-card:nth-child(2)::after { background: var(--red); }
+  .journey-card:nth-child(3)::after { background: var(--yellow); }
+
+  .journey-icon {
+    width: 48px; height: 48px;
+    border-radius: 0;
+    background: rgba(254,205,1,0.1);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 24px;
+    font-size: 22px;
+  }
+
+  .journey-card:nth-child(2) .journey-icon { background: rgba(224,16,39,0.1); }
+
+  .journey-card h3 {
+    font-size: 24px;
+    margin-bottom: 14px;
+    color: var(--white);
+  }
+
+  .journey-card p {
+    font-size: 15px;
+    color: rgba(250,250,250,0.55);
+    line-height: 1.7;
+  }
+
+  /* ── FUTURE ───────────────────────────── */
+  .future {
+    background: var(--black);
+    text-align: center;
+    padding: 140px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .future::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 100%, rgba(224,16,39,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 50% 50%, rgba(254,205,1,0.06) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .future-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .future h2 {
+    font-size: clamp(56px, 7vw, 100px);
+    line-height: 0.9;
+    margin-bottom: 36px;
+  }
+
+  .future h2 span { color: var(--yellow); }
+  .future h2 em { font-style: normal; color: var(--red); }
+
+  .future p {
+    font-size: 19px;
+    color: rgba(250,250,250,0.6);
+    max-width: 620px;
+    margin: 0 auto 56px;
+    line-height: 1.75;
+  }
+
+  .future-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 64px;
+  }
+
+  .future-tag {
+    border: 1px solid var(--gray-mid);
+    padding: 10px 22px;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(250,250,250,0.45);
+    transition: all 0.2s;
+  }
+
+  .future-tag:hover {
+    border-color: var(--yellow);
+    color: var(--yellow);
+  }
+
+  /* ── CTA FINAL ────────────────────────── */
+  .cta-final {
+    background: var(--red);
+    padding: 100px 48px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 60px;
+  }
+
+  .cta-final h2 {
+    font-size: clamp(44px, 5vw, 72px);
+    color: var(--white);
+  }
+
+  .cta-final h2 span { color: var(--yellow); }
+
+  .cta-final p {
+    margin-top: 16px;
+    color: rgba(250,250,250,0.75);
+    font-size: 17px;
+    max-width: 540px;
+  }
+
+  .cta-btn-big {
+    background: var(--yellow);
+    color: var(--black);
+    border: none;
+    padding: 22px 56px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: transform 0.15s, box-shadow 0.2s;
+    flex-shrink: 0;
+  }
+
+  .cta-btn-big:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+
+  /* ── FOOTER ───────────────────────────── */
+  footer {
+    background: var(--gray);
+    padding: 40px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--gray-mid);
+  }
+
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 0.12em;
+    color: var(--yellow);
+  }
+
+  .footer-text {
+    font-size: 13px;
+    color: rgba(250,250,250,0.3);
+    letter-spacing: 0.06em;
+  }
+
+  /* ── ANIMATIONS ───────────────────────── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .delay-1 { transition-delay: 0.1s; }
+  .delay-2 { transition-delay: 0.2s; }
+  .delay-3 { transition-delay: 0.3s; }
+  .delay-4 { transition-delay: 0.4s; }
+
+  /* ── RESPONSIVE ───────────────────────── */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    section { padding: 80px 24px; }
+
+    .hero {
+      grid-template-columns: 1fr;
+      padding: 120px 24px 60px;
+    }
+    .hero-right { display: none; }
+
+    .what-is,
+    .why-content,
+    .brands-intro,
+    .seg-inner,
+    .cta-final {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    .benefits-grid { grid-template-columns: 1fr 1fr; }
+    .journey-grid { grid-template-columns: 1fr; }
+    .brands-logos { grid-template-columns: repeat(2, 1fr); }
+
+    .future { padding: 100px 24px; }
+    .cta-final { padding: 80px 24px; }
+    footer { flex-direction: column; gap: 12px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Retail Media</div>
+  <button class="nav-cta">Saiba Mais</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left fade-up">
+    <span class="hero-tag">Estratégia de Mídia</span>
+    <h1>
+      RETAIL
+      <span>MEDIA</span>
+    </h1>
+    <p class="hero-sub">
+      Como o varejo se tornou um dos meios mais estratégicos para marcas venderem, fortalecerem presença e impactarem consumidores no momento da decisão de compra.
+    </p>
+    <div class="hero-cta-group">
+      <button class="btn-primary">Explorar Agora</button>
+      <button class="btn-ghost">Saiba Como</button>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-stat">
+      <div class="hero-stat-num">70%</div>
+      <div class="hero-stat-label">das decisões acontecem no PDV</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">3×</div>
+      <div class="hero-stat-label">mais conversão vs mídia tradicional</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">$∞</div>
+      <div class="hero-stat-label">potencial de crescimento</div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ticker-item"><span class="ticker-dot"></span> RETAIL MEDIA</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> DECISÃO DE COMPRA</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> BRANDING + PERFORMANCE</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> DADOS REAIS</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> SEGMENTAÇÃO INTELIGENTE</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> PRESENÇA ESTRATÉGICA</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> PDV COMO MÍDIA</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> RETAIL MEDIA</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> DECISÃO DE COMPRA</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> BRANDING + PERFORMANCE</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> DADOS REAIS</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> SEGMENTAÇÃO INTELIGENTE</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> PRESENÇA ESTRATÉGICA</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> PDV COMO MÍDIA</span>
+  </div>
+</div>
+
+<!-- O QUE É -->
+<section>
+  <div class="what-is">
+    <div class="what-is-left fade-up">
+      <span class="section-label">Definição</span>
+      <h2 class="section-title">O QUE É<br><span>RETAIL</span><br>MEDIA?</h2>
+      <p class="what-is-desc">
+        A utilização dos canais e ambientes de varejo para divulgação de marcas, produtos e campanhas publicitárias. Mais do que mídia, o Retail Media conecta <strong>publicidade + comportamento real de compra.</strong>
+      </p>
+    </div>
+    <div class="channels-grid fade-up delay-2">
+      <div class="channel-item"><span class="channel-icon"></span> TVs e telas em loja</div>
+      <div class="channel-item"><span class="channel-icon"></span> Rádio interna</div>
+      <div class="channel-item"><span class="channel-icon"></span> Aplicativos</div>
+      <div class="channel-item"><span class="channel-icon"></span> E-commerce</div>
+      <div class="channel-item"><span class="channel-icon"></span> E-mail marketing</div>
+      <div class="channel-item"><span class="channel-icon"></span> Encartes</div>
+      <div class="channel-item"><span class="channel-icon"></span> Ambientação</div>
+      <div class="channel-item"><span class="channel-icon"></span> Experiência PDV</div>
+      <div class="channel-item" style="grid-column: span 2;"><span class="channel-icon"></span> Comunicação segmentada para clientes</div>
+    </div>
+  </div>
+</section>
+
+<!-- POR QUE CRESCE -->
+<section class="why-grows">
+  <div class="why-content">
+    <div class="fade-up">
+      <span class="section-label">Por que Cresce</span>
+      <h2 class="section-title">O IMPACTO<br><span>CERTO</span><br>NA HORA<br>CERTA</h2>
+      <div class="why-insight">
+        <strong>A ATENÇÃO VIROU ATIVO</strong>
+        <p>As pessoas estão cada vez mais difíceis de impactar nos meios tradicionais. Mas dentro do varejo, o consumidor já está em modo de compra — com intenção real de consumo.</p>
+      </div>
+    </div>
+    <div class="why-three fade-up delay-2">
+      <div class="why-step">
+        <div class="why-step-num">01</div>
+        <div class="why-step-text">
+          <h3>MODO DE COMPRA</h3>
+          <p>O consumidor já está com a mentalidade de comprar — diferente de outras mídias onde ele está apenas consumindo conteúdo.</p>
+        </div>
+      </div>
+      <div class="why-step">
+        <div class="why-step-num">02</div>
+        <div class="why-step-text">
+          <h3>INTENÇÃO DE CONSUMO</h3>
+          <p>Já possui necessidade identificada e está comparando opções — o momento de maior receptividade para mensagens de marca.</p>
+        </div>
+      </div>
+      <div class="why-step">
+        <div class="why-step-num">03</div>
+        <div class="why-step-text">
+          <h3>PRÓXIMO DA DECISÃO</h3>
+          <p>O impacto acontece no momento mais importante da jornada — quando a escolha final ainda pode ser influenciada.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GRANDES VAREJISTAS -->
+<section class="brands-section">
+  <div class="brands-intro">
+    <div class="fade-up">
+      <span class="section-label">O Varejo Como Mídia</span>
+      <h2 class="section-title">GIGANTES<br>DO<br><span>VAREJO</span></h2>
+    </div>
+    <div class="brands-desc fade-up delay-2">
+      <p>O varejo deixou de ser apenas ponto de venda. Grandes redes varejistas se tornaram verdadeiros canais de mídia, com operações bilionárias de Retail Media.</p>
+      <p style="margin-top: 20px; color: rgba(250,250,250,0.45);">Elas possuem algo extremamente valioso: <strong style="color: var(--yellow);">dados, fluxo de consumidores e poder de influência na decisão de compra.</strong></p>
+    </div>
+  </div>
+  <div class="brands-logos fade-up delay-1">
+    <div class="brand-logo-box highlight">AMAZON</div>
+    <div class="brand-logo-box highlight">WALMART</div>
+    <div class="brand-logo-box highlight">MERCADO LIVRE</div>
+    <div class="brand-logo-box highlight">CARREFOUR</div>
+  </div>
+</section>
+
+<!-- BENEFÍCIOS MARCAS -->
+<div class="benefits-strip">
+  <span class="section-label">Para as Marcas</span>
+  <h2 class="section-title">BENEFÍCIOS<br><span>REAIS</span></h2>
+  <div class="benefits-grid">
+    <div class="benefit-card fade-up">
+      <div class="benefit-num">01</div>
+      <div class="benefit-title">Proximidade com o Consumidor</div>
+      <div class="benefit-desc">A marca aparece em um ambiente de confiança e compra ativa.</div>
+    </div>
+    <div class="benefit-card fade-up delay-1">
+      <div class="benefit-num">02</div>
+      <div class="benefit-title">Influência na Decisão</div>
+      <div class="benefit-desc">O impacto acontece próximo da conversão real.</div>
+    </div>
+    <div class="benefit-card fade-up delay-2">
+      <div class="benefit-num">03</div>
+      <div class="benefit-title">Fortalecimento de Marca</div>
+      <div class="benefit-desc">Presença constante gera lembrança e relevância duradoura.</div>
+    </div>
+    <div class="benefit-card fade-up delay-3">
+      <div class="benefit-num">04</div>
+      <div class="benefit-title">Dados e Inteligência</div>
+      <div class="benefit-desc">Campanhas ajustadas com base em comportamento real de compra.</div>
+    </div>
+    <div class="benefit-card fade-up delay-4">
+      <div class="benefit-num">05</div>
+      <div class="benefit-title">Verba Otimizada</div>
+      <div class="benefit-desc">A mídia conversa com pessoas mais propensas à compra.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SEGMENTAÇÃO -->
+<section class="segmentation">
+  <div class="seg-inner">
+    <div class="fade-up">
+      <span class="section-label">Segmentação Real</span>
+      <h2 class="section-title">O VAREJO<br>CONHECE<br><span>SEU</span><br>CLIENTE</h2>
+      <div class="seg-tags">
+        <span class="seg-tag active">Hábitos de compra</span>
+        <span class="seg-tag">Frequência de consumo</span>
+        <span class="seg-tag">Categorias de interesse</span>
+        <span class="seg-tag active">Ticket médio</span>
+        <span class="seg-tag">Sazonalidade</span>
+        <span class="seg-tag">Perfil regional</span>
+      </div>
+    </div>
+    <div class="seg-quote fade-up delay-2">
+      <p>A comunicação deixa de ser genérica e passa a conversar com públicos específicos. Campanhas mais inteligentes, mais direcionadas, mais eficientes.</p>
+      <cite>— Retail Media Intelligence</cite>
+    </div>
+  </div>
+</section>
+
+<!-- JORNADA HÍBRIDA -->
+<section class="journey">
+  <div class="fade-up">
+    <span class="section-label">Jornada Híbrida</span>
+    <h2 class="section-title">FÍSICO +<br><span>DIGITAL</span><br>+ DADOS</h2>
+  </div>
+  <div class="journey-grid">
+    <div class="journey-card fade-up delay-1">
+      <div class="journey-icon">🔍</div>
+      <h3>PESQUISA ONLINE</h3>
+      <p>O consumidor pesquisa, compara preços e busca informações antes de qualquer decisão de compra.</p>
+    </div>
+    <div class="journey-card fade-up delay-2">
+      <div class="journey-icon">🛒</div>
+      <h3>COMPRA OFFLINE</h3>
+      <p>Mesmo após pesquisar online, grande parte das decisões finais acontece dentro da loja física.</p>
+    </div>
+    <div class="journey-card fade-up delay-3">
+      <div class="journey-icon">📱</div>
+      <h3>INFLUÊNCIA MÚLTIPLA</h3>
+      <p>O consumidor recebe influência em múltiplos pontos — celular, loja, e-commerce, telas e comunicação no PDV.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FUTURO -->
+<section class="future">
+  <div class="future-inner fade-up">
+    <span class="section-label">O Futuro</span>
+    <h2>AS CAMPANHAS<br>MAIS <span>EFICIENTES</span><br>DO <em>FUTURO</em></h2>
+    <p>Serão aquelas que conseguirem unir dados, experiência, presença, relacionamento, conveniência e conversão. E o Retail Media está exatamente nesse ponto de encontro.</p>
+    <div class="future-tags">
+      <span class="future-tag">Dados</span>
+      <span class="future-tag">Experiência</span>
+      <span class="future-tag">Presença</span>
+      <span class="future-tag">Relacionamento</span>
+      <span class="future-tag">Conveniência</span>
+      <span class="future-tag">Conversão</span>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<div class="cta-final">
+  <div class="fade-up">
+    <h2>ESTEJA PRESENTE<br>QUANDO A <span>DECISÃO</span><br>ACONTECE</h2>
+    <p>Retail Media não é apenas uma tendência. É uma evolução da forma como marcas se conectam com consumidores. Transforme audiência em oportunidade, fluxo em influência, presença em resultado.</p>
+  </div>
+  <button class="cta-btn-big">FALAR COM ESPECIALISTA</button>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Retail Media</div>
+  <div class="footer-text">Presença estratégica no momento da decisão de compra</div>
+</footer>
+
+<script>
+  // Intersection Observer for fade-up animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Seg tags interactive
+  document.querySelectorAll('.seg-tag').forEach(tag => {
+    tag.addEventListener('click', () => {
+      tag.classList.toggle('active');
+    });
+  });
+
+  // Future tags interactive
+  document.querySelectorAll('.future-tag').forEach(tag => {
+    tag.addEventListener('click', () => {
+      tag.style.borderColor = 'var(--yellow)';
+      tag.style.color = 'var(--yellow)';
+    });
+  });
+</script>
+</body>
+</html>
